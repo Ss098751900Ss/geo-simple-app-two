@@ -1,0 +1,19 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-geosimpleapptwo-dev-172526-authRole",
+      "UnauthRoleArn": "arn:aws:iam::311310072262:role/amplify-geosimpleapptwo-dev-172526-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::311310072262:role/amplify-geosimpleapptwo-dev-172526-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-geosimpleapptwo-dev-172526-deployment",
+      "UnauthRoleName": "amplify-geosimpleapptwo-dev-172526-unauthRole",
+      "StackName": "amplify-geosimpleapptwo-dev-172526",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:311310072262:stack/amplify-geosimpleapptwo-dev-172526/a06c28a0-b80a-11ed-a64b-0e12b1a9d8eb"
+    },
+    "categories": {
+      "auth": {
+        "geosimpleapptwoce967797": {}
+      }
+    }
+  }
+}
