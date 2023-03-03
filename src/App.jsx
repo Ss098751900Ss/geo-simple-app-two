@@ -1,20 +1,17 @@
 import React from "react";
-//import TestMap from "./components/TestMap.tsx";
-//import { withAuthenticator } from "@aws-amplify/ui-react";
-//import { Authenticator } from "@aws-amplify/ui-react";
-//import { Amplify } from "aws-amplify";
-//import awsconfig from "./aws-exports";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Amplify } from "aws-amplify";
+import awsconfig from "./aws-exports";
+Amplify.configure(awsconfig);
 
-//Amplify.configure(awsconfig);
 function App() {
   return (
-    <h1
-      className="App"
-      style={{ alignItems: "center", verticalAlign: "center" }}
-    >
-      Hello from React!
-    </h1>
+    <Authenticator>
+      <div>
+        <h1>Hello from React!</h1>
+      </div>
+    </Authenticator>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
