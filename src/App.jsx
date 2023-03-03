@@ -6,11 +6,9 @@ Amplify.configure(awsconfig);
 
 function App() {
   return (
-    <Authenticator>
-      <div>
-        <h1>Hello from React!</h1>
-      </div>
-    </Authenticator>
+    <div>
+      <h1>Hello from React!</h1>
+    </div>
   );
 }
 
