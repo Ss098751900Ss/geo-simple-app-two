@@ -3,7 +3,8 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import Map from "react-map-gl";
-//import "mapbox-gl/dist/mapbox-gl.css";
+import "@aws-amplify/ui-react/styles.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -16,7 +17,14 @@ function App() {
           zoom: 14,
         }}
         mapStyle="mapbox://styles/mapbox/navigation-night-v1"
-        style={{ width: "100vw", height: "100vh", zIndex: "0" }}
+        style={{
+          width: "100vw",
+          height: "100vh",
+          zIndex: "0",
+          position: "absolute",
+          top: "0px",
+          left: "0px",
+        }}
         mapboxAccessToken="pk.eyJ1Ijoic3MwOTg3NTE5MDBzcyIsImEiOiJjbDVyNjllejEyNGF2M2Jyb25zZzM4M2Y0In0.A4sZaXQPpyTCy5cWGm750w"
       >
         <div
