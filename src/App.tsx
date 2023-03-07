@@ -5,7 +5,53 @@ import awsconfig from "./aws-exports";
 import Map from "react-map-gl";
 import "@aws-amplify/ui-react/styles.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { useControl } from "react-map-gl";
+import { useCallback } from "react";
+import MapboxDraw from "@mapbox/mapbox-gl-draw";
+import type { MapRef } from "react-map-gl";
+
 Amplify.configure(awsconfig);
+
+const onUpdate = useCallback((e) => {
+  setFeatures((currFeatures) => {
+    const newFeatures = { ...currFeatures };
+    for (const f of e.features) {
+      newFeatures[f.id] = f;
+    }
+    return newFeatures;
+  });
+}, []);
+
+const onDelete = useCallback((e) => {
+  setFeatures((currFeatures) => {
+    const newFeatures = { ...currFeatures };
+    for (const f of e.features) {
+      delete newFeatures[f.id];
+    }
+    return newFeatures;
+  });
+}, []);
+
+const DrawControl = () => {
+  useControl<MapboxDraw>(
+    () => new MapboxDraw(props),
+    ({ map }: { map: MapRef }) => {
+      map.on("draw.create", onUpdate);
+      map.on("draw.update", onUpdate);
+      map.on("draw.delete", onDelete);
+    },
+    ({ map }: { map: MapRef }) => {
+      map.off("draw.create", onUpdate);
+      map.off("draw.update", onUpdate);
+      map.off("draw.delete", onDelete);
+    },
+    {
+      position: props.position,
+    }
+  );
+
+  return null;
+};
 
 function App() {
   return (

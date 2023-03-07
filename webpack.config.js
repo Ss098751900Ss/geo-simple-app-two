@@ -18,11 +18,20 @@ module.exports = {
     static: {
       directory: path.join(__dirname, "build"),
     },
-    port: 3000,
+    port: 3001,
   },
   module: {
     // exclude node_modules
     rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: "ts-loader",
+        options: {
+          transpileOnly: false,
+        },
+      },
+
       {
         test: /\.js|\.jsx|\.tsx$/,
         exclude: /node_modules/,
