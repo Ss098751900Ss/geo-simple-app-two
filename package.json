@@ -13,11 +13,16 @@
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.0",
+    "@eslint/create-config": "^0.4.2",
     "@mapbox/mapbox-gl-draw": "^1.4.1",
     "@types/mapbox__mapbox-gl-draw": "^1.3.3",
     "@types/react": "^18.0.28",
+    "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@typescript-eslint/parser": "^5.54.1",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
+    "eslint": "^8.35.0",
+    "eslint-plugin-react": "^7.32.2",
     "html-webpack-plugin": "^5.5.0",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.5",
@@ -31,5 +36,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-map-gl": "^7.0.21"
-  }
+  },
+  "repository": "https://github.com/Ss098751900Ss/geo-simple-app-two.git",
+  "author": "Ss098751900Ss <ss098751900ss@gmail.com>"
 }
