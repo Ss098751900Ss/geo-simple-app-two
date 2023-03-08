@@ -12,27 +12,27 @@ import type { MapRef } from "react-map-gl";
 
 Amplify.configure(awsconfig);
 
-const onUpdate = useCallback((e) => {
-  setFeatures((currFeatures) => {
-    const newFeatures = { ...currFeatures };
-    for (const f of e.features) {
-      newFeatures[f.id] = f;
-    }
-    return newFeatures;
-  });
-}, []);
-
-const onDelete = useCallback((e) => {
-  setFeatures((currFeatures) => {
-    const newFeatures = { ...currFeatures };
-    for (const f of e.features) {
-      delete newFeatures[f.id];
-    }
-    return newFeatures;
-  });
-}, []);
-
 const DrawControl = () => {
+  const onUpdate = useCallback((e) => {
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
+      for (const f of e.features) {
+        newFeatures[f.id] = f;
+      }
+      return newFeatures;
+    });
+  }, []);
+
+  const onDelete = useCallback((e) => {
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
+      for (const f of e.features) {
+        delete newFeatures[f.id];
+      }
+      return newFeatures;
+    });
+  }, []);
+
   useControl<MapboxDraw>(
     () => new MapboxDraw(props),
     ({ map }: { map: MapRef }) => {
@@ -87,6 +87,14 @@ function App() {
         >
           <h1>This is map</h1>
         </div>
+        <DrawControl
+          osition="top-right"
+          displayControlsDefault={false}
+          controls={{
+            polygon: true,
+            trash: true,
+          }}
+        />
       </Map>
     </>
   );

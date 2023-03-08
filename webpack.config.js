@@ -25,8 +25,8 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
         loader: "ts-loader",
+        exclude: /node_modules/,
         options: {
           transpileOnly: false,
         },
@@ -45,6 +45,6 @@ module.exports = {
   },
   // pass all js files through Babel
   resolve: {
-    extensions: ["*", ".js", "jsx", "tsx"],
+    extensions: [".js", "jsx", "tsx"],
   },
 };
