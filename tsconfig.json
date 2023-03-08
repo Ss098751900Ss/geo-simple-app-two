@@ -4,6 +4,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "jsx": "react",
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": false
   }
 }

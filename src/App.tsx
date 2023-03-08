@@ -6,13 +6,15 @@ import Map from "react-map-gl";
 import "@aws-amplify/ui-react/styles.css";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useControl } from "react-map-gl";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
-import type { MapRef } from "react-map-gl";
+
+import { MapRef } from "react-map-gl";
 
 Amplify.configure(awsconfig);
 
 const DrawControl = () => {
+  const [features, setFeatures] = useState({});
   const onUpdate = useCallback((e) => {
     setFeatures((currFeatures) => {
       const newFeatures = { ...currFeatures };
