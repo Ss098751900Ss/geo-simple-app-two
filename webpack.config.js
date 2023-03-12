@@ -28,7 +28,7 @@ module.exports = {
         loader: "ts-loader",
         exclude: /node_modules/,
         options: {
-          transpileOnly: false,
+          transpileOnly: true,
         },
       },
 
@@ -38,8 +38,8 @@ module.exports = {
         use: ["babel-loader"],
       },
       {
-        test: /\.css$/i,
-        use: ["css-loader"],
+        test: /\.css$/,
+        use: ["css-loader", "style-loader"],
       },
     ],
   },

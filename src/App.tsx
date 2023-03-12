@@ -3,8 +3,14 @@ import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import Map from "react-map-gl";
-import "@aws-amplify/ui-react/styles.css";
+//import "@aws-amplify/ui-react/styles.css";
 import "mapbox-gl/dist/mapbox-gl.css";
+import "maplibre-gl/dist/maplibre-gl.css";
+import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+import "@aws-amplify/ui-react/styles.css";
+
+import maplibregl from "maplibre-gl";
+
 import { AppContext, defaultState } from "./AppContext";
 import { useControl } from "react-map-gl";
 import { useCallback, useState, useContext } from "react";
@@ -14,36 +20,36 @@ import type { MapRef, ControlPosition } from "react-map-gl";
 
 Amplify.configure(awsconfig);
 
-type DrawControlProps = ConstructorParameters<typeof MapboxDraw>[0] & {
-  position?: ControlPosition;
+//type DrawControlProps = ConstructorParameters<typeof MapboxDraw>[0] & {
+//  position?: ControlPosition;
+//
+//  onCreate?: (evt: { features: object[] }) => void;
+//  onUpdate?: (evt: { features: object[]; action: string }) => void;
+//  onDelete?: (evt: { features: object[] }) => void;
+//};
 
-  onCreate?: (evt: { features: object[] }) => void;
-  onUpdate?: (evt: { features: object[]; action: string }) => void;
-  onDelete?: (evt: { features: object[] }) => void;
-};
-
-const DrawControl: FC = (props: DrawControlProps) => {
-  const context = useContext(AppContext);
-
-  useControl<MapboxDraw>(
-    () => new MapboxDraw(props),
-    ({ map }: { map: MapRef }) => {
-      map.on("draw.create", props.onUpdate);
-      map.on("draw.update", props.onUpdate);
-      map.on("draw.delete", props.onDelete);
-    },
-    ({ map }: { map: MapRef }) => {
-      map.off("draw.create", props.onUpdate);
-      map.off("draw.update", props.onUpdate);
-      map.off("draw.delete", props.onDelete);
-    },
-    {
-      position: context.props.position,
-    }
-  );
-
-  return null;
-};
+//const DrawControl: FC = (props: DrawControlProps) => {
+//  const context = useContext(AppContext);
+//
+//  useControl<MapboxDraw>(
+//    () => new MapboxDraw(props),
+//    ({ map }: { map: MapRef }) => {
+//      map.on("draw.create", props.onUpdate);
+//      map.on("draw.update", props.onUpdate);
+//      map.on("draw.delete", props.onDelete);
+//    },
+//    ({ map }: { map: MapRef }) => {
+//      map.off("draw.create", props.onUpdate);
+//      map.off("draw.update", props.onUpdate);
+//      map.off("draw.delete", props.onDelete);
+//    },
+//    {
+//      position: context.props.position,
+//    }
+//  );
+//
+//  return null;
+//};
 
 const App: FC = () => {
   //interface Feature {
@@ -97,7 +103,8 @@ const App: FC = () => {
         width: "90%",
         height: "90%",
       }}
-      mapStyle="mapbox://styles/mapbox/navigation-night-v1"
+      mapLib={maplibregl}
+      mapStyle="mapbox://styles/mapbox/light-v11"
       mapboxAccessToken="pk.eyJ1Ijoic3MwOTg3NTE5MDBzcyIsImEiOiJjbDVyNjllejEyNGF2M2Jyb25zZzM4M2Y0In0.A4sZaXQPpyTCy5cWGm750w"
     ></Map>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-//import Hello from "./Hello.jsx";
 import App from "./App.tsx";
 
 const container = document.getElementById("root");
