@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FC } from "react";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
@@ -22,8 +22,7 @@ type DrawControlProps = ConstructorParameters<typeof MapboxDraw>[0] & {
   onDelete?: (evt: { features: object[] }) => void;
 };
 
-function DrawControl(props: DrawControlProps): FunctionComponent {
-  const [features, setFeatures] = useState({});
+const DrawControl: FC = (props: DrawControlProps) => {
   const context = useContext(AppContext);
 
   useControl<MapboxDraw>(
@@ -44,95 +43,64 @@ function DrawControl(props: DrawControlProps): FunctionComponent {
   );
 
   return null;
-}
+};
 
-function App() {
-  const onUpdate = useCallback((e: any) => {
-    setFeatures((currFeatures) => {
-      const newFeatures: any = { ...currFeatures };
-      for (const f of e.features) {
-        newFeatures[f.id] = f;
-      }
-      return newFeatures;
-    });
-  }, []);
+const App: FC = () => {
+  //interface Feature {
+  //  geometry: object;
+  //  id: string;
+  //}
 
-  const onDelete = useCallback((e: any) => {
-    setFeatures((currFeatures) => {
-      const newFeatures: any = { ...currFeatures };
-      for (const f of e.features) {
-        delete newFeatures[f.id];
-      }
-      return newFeatures;
-    });
-  }, []);
+  //type StringKeys = Record<string, Feature>;
+  //interface Event {
+  //  features: Array<Feature>;
+  //  target: object;
+  //  type: string;
+  //}
 
-  const hoge = typeof MapboxDraw;
-  console.log(hoge);
+  //const [features, setFeatures] = useState<StringKeys>({});
+  //const onUpdate = useCallback((e: Event) => {
+  //  setFeatures((currFeatures) => {
+  //    const newFeatures = { ...currFeatures };
+
+  //    for (const f of e.features) {
+  //      newFeatures[f.id] = f;
+  //    }
+  //    return newFeatures;
+  //  });
+  //}, []);
+
+  //const onDelete = useCallback((e: Event) => {
+  //  setFeatures((currFeatures) => {
+  //    const newFeatures = { ...currFeatures };
+  //    for (const f of e.features) {
+  //      delete newFeatures[f.id];
+  //    }
+  //    return newFeatures;
+  //  });
+  //}, []);
+
+  //const hoge = typeof MapboxDraw;
+  //console.log(hoge);
 
   return (
-    <>
-      <AppContext.Provide
-        value={{
-          map: defaultState.map,
-          props: defaultState.props,
-          state: defaultState.state,
-          config: {
-            locationClient: {},
-            transformRequest: defaultState.config.transformRequest,
-          },
-          hooks: {
-            useGeojson: {},
-            useDetectMode: {},
-          },
-        }}
-      >
-        <Map
-          initialViewState={{
-            longitude: -122.4,
-            latitude: 37.8,
-            zoom: 14,
-          }}
-          mapStyle="mapbox://styles/mapbox/navigation-night-v1"
-          style={{
-            width: "100vw",
-            height: "100vh",
-            zIndex: "0",
-            position: "absolute",
-            top: "0px",
-            left: "0px",
-          }}
-          mapboxAccessToken="pk.eyJ1Ijoic3MwOTg3NTE5MDBzcyIsImEiOiJjbDVyNjllejEyNGF2M2Jyb25zZzM4M2Y0In0.A4sZaXQPpyTCy5cWGm750w"
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: "10px",
-              left: "10px",
-              zIndex: "1",
-              backgroundColor: "#25283a",
-              opacity: "0.8",
-              borderRadius: "10px",
-              padding: "10px",
-            }}
-          >
-            <h1>This is map</h1>
-          </div>
-          <DrawControl
-            position="top-right"
-            displayControlsDefault={false}
-            controls={{
-              polygon: true,
-              trash: true,
-            }}
-            onCreate={onUpdate}
-            onUpdate={onUpdate}
-            onDelete={onDelete}
-          />
-        </Map>
-      </AppContext.Provide>
-    </>
+    <Map
+      initialViewState={{
+        longitude: -122.4,
+        latitude: 37.8,
+        zoom: 14,
+      }}
+      style={{
+        position: "absolute",
+        top: "0px",
+        left: "0px",
+        width: "90%",
+        height: "90%",
+      }}
+      mapStyle="mapbox://styles/mapbox/navigation-night-v1"
+      mapboxAccessToken="pk.eyJ1Ijoic3MwOTg3NTE5MDBzcyIsImEiOiJjbDVyNjllejEyNGF2M2Jyb25zZzM4M2Y0In0.A4sZaXQPpyTCy5cWGm750w"
+    ></Map>
   );
-}
+};
 
-export default withAuthenticator(App);
+export default App;
